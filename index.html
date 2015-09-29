@@ -1,14 +1,13 @@
 <!doctype html>
-<html lang="es" ng-app>
+<html lang="es" ng-app="myApp">
     <head>
         <meta charset="utf-8" />
-        <title>Pokemons</title>
+        <title>Puchamones</title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles/app.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        <script src="js/app.js"></script>
     </head>
 
     <body>
@@ -31,7 +30,7 @@
             </div>
         </header>
 
-        <div id="puchamonsContainer" ng-controller="BookListCtrl">
+        <div id="puchamonsContainer" ng-controller="PuchamonsCtrl">
             <form role="form">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search a puchamon here..." title="Search a puchamon here" maxlength="10" />
@@ -39,22 +38,21 @@
             </form>
             <div>
             <ul class="list-unstyled">
-                <li class="book" style="background: white url(imgs/{{book.imgUrl}}) no-repeat" ng-repeat="book in books">
+                <li class="book" ng-repeat="puchamon in puchamons">
                     <div class="book-details clearfix">
-                        <h3>{{book.name}}</h3>
-                        <p>{{book.price}}</p>
+                        <h3>{{ puchamon.id }}. {{ puchamon.name }}</h3>
                         <ul class="list-unstyled list-inline">
-                            <li>Rating: {{book.rating}}</li>
-                            <li>Binding: {{book.binding}}</li>
-                            <li>Publisher: {{book.publisher}}</li>
-                            <li>Released: {{book.releaseDate}}</li>
+                            <li>Attack: {{ puchamon.attack }}</li>
+                            <li>Defense: {{ puchamon.defense }}</li>
+                            <li>Evolve To: {{ puchamons[puchamon.evolveTo]["name"] }}</li>
+                            <li>Evolve Level: {{ puchamon.evolveLevel }}</li>
                         </ul>
-                        <p>{{book.details}}</p>
-                        <button class="btn btn-info pull-right" ng-click="addToKart(book)">Add to Kart</button>
+                        <button class="btn btn-info pull-right" ng-click="seePuchamon(puchamon)">See details</button>
                     </div>
                 </li>
             </ul>
         </div>
 
+        <script src="js/app.js"></script>
     </body>
 </html>
