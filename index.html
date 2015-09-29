@@ -2,33 +2,59 @@
 <html lang="es" ng-app>
     <head>
         <meta charset="utf-8" />
-        <title>Bookmark</title>
+        <title>Pokemons</title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="/styles/app.css" />
+        <link rel="stylesheet" href="styles/app.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-        <script src="/js/app.js"></script>
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="js/app.js"></script>
     </head>
 
     <body>
         <header id="header" ng-controller="HeaderCtrl">
-            <span class="logo pull-left">{{ details.title }}</span>
-            <span class="tagline pull-left">{{ details.description }}</span>
+            <span class="logo pull-left">{{ author.name }}</span>
+            <span class="tagline pull-left">{{ author.description }}</span>
             <div class="nav-wrapper pull-left">
                 <ul class="nav nav-pills">
                     <li class="active">
                         <a href="#">
-                            Books
+                            Puchamons
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            Kart
+                            Types
                         </a>
                     </li>
                 </ul>
             </div>
         </header>
+
+        <div id="puchamonsContainer" ng-controller="BookListCtrl">
+            <form role="form">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search a puchamon here..." title="Search a puchamon here" maxlength="10" />
+              </div>
+            </form>
+            <div>
+            <ul class="list-unstyled">
+                <li class="book" style="background: white url(imgs/{{book.imgUrl}}) no-repeat" ng-repeat="book in books">
+                    <div class="book-details clearfix">
+                        <h3>{{book.name}}</h3>
+                        <p>{{book.price}}</p>
+                        <ul class="list-unstyled list-inline">
+                            <li>Rating: {{book.rating}}</li>
+                            <li>Binding: {{book.binding}}</li>
+                            <li>Publisher: {{book.publisher}}</li>
+                            <li>Released: {{book.releaseDate}}</li>
+                        </ul>
+                        <p>{{book.details}}</p>
+                        <button class="btn btn-info pull-right" ng-click="addToKart(book)">Add to Kart</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
     </body>
 </html>
