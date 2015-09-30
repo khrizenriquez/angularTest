@@ -11,17 +11,15 @@
 */
 'use strict';
 
-var myApp 	= angular.module('myApp', ['ngRoute']);
-var pokeUrl = 'http://pokeapi.co/api/v1/';
+var PuchamonService = angular.module('PuchamonService', []);
+var myApp 			= angular.module('myApp', ['ngRoute', 'PuchamonService']);
+var pokeUrl 		= 'http://pokeapi.co/api/v1/';
 
 myApp.config(function ($routeProvider) {
 	$routeProvider
 		.when("/puchamonList", {
 			templateUrl: "parts/puchamonsList.html",
 			controller: "PuchamonsCtrl"
-		})
-		.when("/puchamonTypes", {
-			templateUrl: "parts/puchamonsDetail.html"
 		})
 	.otherwise({
 		redirectTo: "/puchamonList"
@@ -37,35 +35,45 @@ myApp.controller('HeaderCtrl', function($scope) {
 	};
 });
 
-myApp.controller('PuchamonsCtrl', function ($scope, $http) {
-	/*
-	Data returns:
-		{
-			attack: 49
-			curve: 1.3
-			defense: 49
-			evolveLevel: 16
-			evolveTo: "2"
-			levels: Array[2]
-			moves: Array[2]
-			name: "Bulbasaur"
-			probability: 3
-			type: "grass"
-		}
-	*/
-	var response = $http.get('models/pokemons.json');
-	response.then(function (resp) {
-       	$scope.puchamons = resp.data;
-    });
-    response.error(function (resp) {
-    	console.log(resp);
-    });
+PuchamonService.factory('PuchamonData', ['$http', function ($http) {
+	var obj = {};
 
-    $scope.seePuchamon = function (puchamon) {
-    	console.log(puchamon);
-    };
-});
+    obj.getPuchamons = function () {
+    	/*
+		Data returns:
+			{
+				attack: 49
+				curve: 1.3
+				defense: 49
+				evolveLevel: 16
+				evolveTo: "2"
+				levels: Array[2]
+				moves: Array[2]
+				name: "Bulbasaur"
+				probability: 3
+				type: "grass"
+			}
+		*/
+        return $http.get('models/pokemons.json');
+    }
 
-myApp.controller('PuchamonsTypeCtrl', function ($scope, $http) {
+    obj.seePuchamon = function(puchamons) {};
 
+ 	return obj;
+}]);
+
+myApp.controller('PuchamonsCtrl', function($scope, PuchamonData) {
+	$scope.puchamons;
+	PuchamonData.getPuchamons()
+		.success(function (resp) {
+	       	$scope.puchamons = resp;
+	    })
+	    .error(function (err) {
+	    	console.log(err);
+	    	$scope.puchamons = [];
+	    });
+
+	$scope.seePuchamon = function (puchamonId) {
+		console.log('Puchamon');
+	}
 });
