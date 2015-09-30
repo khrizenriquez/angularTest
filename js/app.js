@@ -11,21 +11,25 @@
 */
 'use strict';
 
-var myApp 			= angular.module('myApp', ['ngRoute', 'PuchamonService']);
-var pokeUrl 		= 'http://pokeapi.co/api/v1/';
+var myApp = angular.module('myApp', ['ngRoute', 'PuchamonService']);
 
 myApp.config(function ($routeProvider) {
 	$routeProvider
-		.when("/puchamonList", {
-			templateUrl: "parts/puchamonsList.html",
-			controller: "PuchamonsCtrl"
+		.when('/puchamonList', {
+			templateUrl: 'parts/puchamonsList.html',
+			controller: 'PuchamonsCtrl'
+		})
+		.when('/puchamonDetail/:number', {
+			templateUrl: function (urlAttr) {
+				return 'parts/puchamosDetails.html';
+			}, controller: 'PuchamonDetailCtrl'
 		})
 	.otherwise({
 		redirectTo: "/puchamonList"
 	});
 });
 
-myApp.controller('HeaderCtrl', function($scope) {
+myApp.controller('HeaderCtrl', function ($scope) {
 	$scope.author = {
 		name: 			'Khriz Enríquez',
 		github: 		'khrizenriquez',
@@ -34,7 +38,7 @@ myApp.controller('HeaderCtrl', function($scope) {
 	};
 });
 
-myApp.controller('PuchamonsCtrl', function($scope, PuchamonData) {
+myApp.controller('PuchamonsCtrl', function ($scope, PuchamonData) {
 	$scope.puchamons;
 	PuchamonData.getPuchamons()
 		.success(function (resp) {
@@ -48,4 +52,22 @@ myApp.controller('PuchamonsCtrl', function($scope, PuchamonData) {
 	$scope.seePuchamon = function (puchamonId) {
 		console.log('Puchamon');
 	}
+});
+
+myApp.controller("PuchamonDetailCtrl", function ($scope, $routeParams, PuchamonDetail) {
+	var puchamonName 	= '';
+	var puchamonNumber 	= $routeParams.number;
+	$scope.puchamon;
+	PuchamonDetail.puchamonDetail(puchamonNumber)
+		.success(function (resp) {
+			console.log(resp);
+			$scope.puchamon = resp;
+		}).error(function (err) {
+			console.log(err);
+			$scope.puchamon = [];
+		});
+
+	/*$scope.returnToListView = function () {
+		console.log('return to view');
+	}*/
 });

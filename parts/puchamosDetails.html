@@ -1,3 +1,20 @@
-<div>
-	Puchamons details
+<div id="bookListWrapper" ng-controller="PuchamonDetailCtrl">
+	<ul class="list-unstyled">
+		<!-- <li class="book" ng-repeat="puchamon in puchamons"> -->
+			<div class="book-details clearfix">
+				<h3>{{ puchamon.id }}. {{ puchamon.name | uppercase }}</h3>
+				<p>{{ 'Species.' + puchamon.species }}</p>
+				<ul class="list-unstyled list-inline">
+					<li>Attack: {{ puchamon.attack }}</li>
+					<li>Defense: {{ puchamon.defense }}</li>
+					<li>Special attack: {{ puchamon.sp_atk }}</li>
+					<li>Special defense: {{ puchamon.sp_def }}</li>
+					<li>Speed: {{ puchamon.speed }}</li>
+					<li>
+						<img src="" alt="Puchamon: {{ puchamon.name }}" />
+					</li>
+				</ul>
+			</div>
+		<!-- </li> -->
+	</ul>
 </div>

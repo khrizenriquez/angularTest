@@ -2,7 +2,7 @@
 
 var PuchamonService = angular.module('PuchamonService', []);
 
-PuchamonService.factory('PuchamonData', ['$http', function ($http) {
+PuchamonService.factory('PuchamonData', function ($http) {
 	var obj = {};
 
     obj.getPuchamons = function () {
@@ -27,4 +27,18 @@ PuchamonService.factory('PuchamonData', ['$http', function ($http) {
     obj.seePuchamon = function(puchamons) {};
 
  	return obj;
-}]);
+});
+
+PuchamonService.factory("PuchamonDetail", function ($http) {
+	var obj = {};
+
+    obj.puchamonDetail = function (puchamonNumber) {
+    	var pokeUrl = 'http://pokeapi.co/api/v1/pokemon/';
+
+    	return $http.get(pokeUrl + parseInt(puchamonNumber));
+    }
+
+    obj.returnToListView = function () {};
+
+ 	return obj;
+});

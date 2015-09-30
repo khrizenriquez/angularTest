@@ -8,14 +8,16 @@
     <ul class="list-unstyled">
         <li class="puchamon" ng-repeat="puchamon in puchamons">
             <div class="puchamon-details clearfix">
-                <h3>{{ puchamon.id }}. {{ puchamon.name }}</h3>
+                <h3>{{ puchamon.id + '. ' + puchamon.name }}</h3>
                 <ul class="list-unstyled list-inline">
                     <li>Attack: {{ puchamon.attack }}</li>
                     <li>Defense: {{ puchamon.defense }}</li>
                     <li>Evolve To: {{ puchamons[puchamon.evolveTo]["name"] }}</li>
                     <li>Evolve Level: {{ puchamon.evolveLevel }}</li>
                 </ul>
-                <button class="btn btn-info pull-right" ng-click="seePuchamon(puchamon)">See details</button>
+                <a 
+                href="#/puchamonDetail/{{ puchamon.id }}" 
+                class="btn btn-info pull-right">See details</a>
             </div>
         </li>
     </ul>
