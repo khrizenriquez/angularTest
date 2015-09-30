@@ -30,4 +30,24 @@
 */
 #header {
     width: 100%;
+    height: 80px;
+}
+
+#puchamonsContainer {
+    width: 100%;
+    padding: 10px;
+}
+
+#puchamonsContainer input {
+    width: 25%;
+}
+
+#puchamonsContainer .puchamon {
+    border: 1px solid gray;
+    padding: 10px;
+    margin-bottom: 10px;    
+}
+
+#puchamonsContainer .puchamon .puchamon-details {
+    margin-left: 160px;
 }

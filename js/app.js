@@ -11,10 +11,24 @@
 */
 'use strict';
 
-var myApp 	= angular.module("myApp", []);
+var myApp 	= angular.module('myApp', ['ngRoute']);
 var pokeUrl = 'http://pokeapi.co/api/v1/';
 
-myApp.controller("HeaderCtrl", function($scope) {
+myApp.config(function ($routeProvider) {
+	$routeProvider
+		.when("/puchamonList", {
+			templateUrl: "parts/puchamonsList.html",
+			controller: "PuchamonsCtrl"
+		})
+		.when("/puchamonTypes", {
+			templateUrl: "parts/puchamonsDetail.html"
+		})
+	.otherwise({
+		redirectTo: "/puchamonList"
+	});
+});
+
+myApp.controller('HeaderCtrl', function($scope) {
 	$scope.author = {
 		name: 			'Khriz Enríquez',
 		github: 		'khrizenriquez',
@@ -50,4 +64,8 @@ myApp.controller('PuchamonsCtrl', function ($scope, $http) {
     $scope.seePuchamon = function (puchamon) {
     	console.log(puchamon);
     };
+});
+
+myApp.controller('PuchamonsTypeCtrl', function ($scope, $http) {
+
 });

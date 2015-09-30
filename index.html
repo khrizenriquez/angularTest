@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" />
         <link rel="stylesheet" href="styles/app.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     </head>
 
@@ -17,12 +18,12 @@
             <div class="nav-wrapper pull-left">
                 <ul class="nav nav-pills">
                     <li class="active">
-                        <a href="#">
+                        <a href="#/puchamonList">
                             Puchamones
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="#/puchamonTypes">
                             Types
                         </a>
                     </li>
@@ -30,28 +31,7 @@
             </div>
         </header>
 
-        <div id="puchamonsContainer" ng-controller="PuchamonsCtrl">
-            <form role="form">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search a puchamon here..." title="Search a puchamon here" maxlength="10" />
-              </div>
-            </form>
-            <div>
-            <ul class="list-unstyled">
-                <li class="book" ng-repeat="puchamon in puchamons">
-                    <div class="book-details clearfix">
-                        <h3>{{ puchamon.id }}. {{ puchamon.name }}</h3>
-                        <ul class="list-unstyled list-inline">
-                            <li>Attack: {{ puchamon.attack }}</li>
-                            <li>Defense: {{ puchamon.defense }}</li>
-                            <li>Evolve To: {{ puchamons[puchamon.evolveTo]["name"] }}</li>
-                            <li>Evolve Level: {{ puchamon.evolveLevel }}</li>
-                        </ul>
-                        <button class="btn btn-info pull-right" ng-click="seePuchamon(puchamon)">See details</button>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <div ng-view></div>
 
         <script src="js/app.js"></script>
     </body>

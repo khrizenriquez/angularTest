@@ -1,0 +1,22 @@
+<div id="puchamonsContainer" ng-controller="PuchamonsCtrl">
+    <form role="form">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search a puchamon here..." title="Search a puchamon here" maxlength="10" />
+      </div>
+    </form>
+    <div>
+    <ul class="list-unstyled">
+        <li class="puchamon" ng-repeat="puchamon in puchamons">
+            <div class="puchamon-details clearfix">
+                <h3>{{ puchamon.id }}. {{ puchamon.name }}</h3>
+                <ul class="list-unstyled list-inline">
+                    <li>Attack: {{ puchamon.attack }}</li>
+                    <li>Defense: {{ puchamon.defense }}</li>
+                    <li>Evolve To: {{ puchamons[puchamon.evolveTo]["name"] }}</li>
+                    <li>Evolve Level: {{ puchamon.evolveLevel }}</li>
+                </ul>
+                <button class="btn btn-info pull-right" ng-click="seePuchamon(puchamon)">See details</button>
+            </div>
+        </li>
+    </ul>
+</div>
