@@ -18,7 +18,8 @@ myApp.controller("HeaderCtrl", function($scope) {
 	$scope.author = {
 		name: 			'Khriz Enríquez',
 		github: 		'khrizenriquez',
-		description: 	'Pruebas con AngularJS mostrando a los pokemones'
+		appName: 		'Puchamones',
+		description: 	'Tienes que atraparlos a todos, son solo 150 + 1'
 	};
 });
 
